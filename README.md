@@ -38,8 +38,11 @@
       } catch (SQLException e) {
           e.printStackTrace();
       }
-	  
+```
+**이 코드는 개체를 만들고 제목을 "Shopping"으로 설정합니다. 개체는 GUI(그래픽 사용자 인터페이스) 창입니다.**
+```
     frame = new JFrame("Shopping");
+```
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     panel = new JPanel();
