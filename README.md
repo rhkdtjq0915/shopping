@@ -4,9 +4,9 @@
 ### GUI와 이벤트 활용
 ***
 
-이 프로그램은 MySQL 데이터베이스를 사용하여 제품 정보를 저장합니다. 데이터베이스 연결은 생성자에서 설정됩니다.
-sellerService()buyerService()메서드는 판매자 관련 작업을 모두 처리합니다. 이 메서드는 모든 구매자 관련 작업을 처리합니다.sellerService()buyerService()
-main()ShoppingUI 메서드는 새 개체를 만들고 주 메뉴를 표시합니다.main()ShoppingUI
+1. 이 프로그램은 MySQL 데이터베이스를 사용하여 제품 정보를 저장합니다. 데이터베이스 연결은 생성자에서 설정됩니다.
+2. sellerService()buyerService()메서드는 판매자 관련 작업을 모두 처리합니다. 이 메서드는 모든 구매자 관련 작업을 처리합니다.sellerService()buyerService()
+3. main()ShoppingUI 메서드는 새 개체를 만들고 주 메뉴를 표시합니다.main()ShoppingUI
 
 # 주요기능
 
