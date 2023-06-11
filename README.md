@@ -41,11 +41,14 @@
           e.printStackTrace();
       }
 ```
-**이 코드는 개체를 만들고 제목을 "Shopping"으로 설정합니다. 개체는 GUI(그래픽 사용자 인터페이스) 창입니다.**
+**개체를 만들고 제목을 "Shopping"으로 설정합니다. 개체는 GUI(그래픽 사용자 인터페이스) 창입니다.**
 ```
     frame = new JFrame("Shopping");
 ```
+**개체에 대한 기본 닫기 작업을 로 설정합니다. 즉, 사용자가 개체를 닫으면 응용 프로그램이 종료됩니다.**
+```
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    ```
 
     panel = new JPanel();
     
