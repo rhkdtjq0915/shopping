@@ -21,7 +21,7 @@
 # 코드
 **이 프로그램은 MySQL 데이터베이스를 사용하여 제품 정보를 저장합니다. 데이터베이스 연결은 생성자에서 설정됩니다.  
 sellerService()메서드는 판매자 관련 작업을 모두 처리합니다.   
-buyerService() 메서드는 모든 구매자 관련 작업을 처리합니다.  
+
 main()ShoppingUI 메서드는 새 개체를 만들고 주 메뉴를 표시합니다.**   
    
 **먼저 참고한 프로그램 소스 입니다.**
@@ -68,4 +68,85 @@ main()ShoppingUI 메서드는 새 개체를 만들고 주 메뉴를 표시합니
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
+```  
+**buyerService() 메서드는 모든 구매자 관련 작업을 처리합니다.  **
+```
+ public void buyerService() {
+	    do {
+	        String[] options = {"구매하기", "뒤로가기"};
+	        int sel3 = JOptionPane.showOptionDialog(
+	                null,
+	                "구매 시스템입니다.\n기능을 선택하세요.",
+	                "구매자",
+	                JOptionPane.DEFAULT_OPTION,
+	                JOptionPane.PLAIN_MESSAGE,
+	                null,
+	                options,
+	                options[0]
+	        );
+
+	        if (sel3 == 0) {
+	            // Retrieve available product information
+	            String query = "SELECT info FROM products";
+	            try {
+	                pstmt = conn.prepareStatement(query);
+	                rs = pstmt.executeQuery();
+
+	                StringBuilder availableProducts = new StringBuilder("구매할 상품정보를 선택하세요:\n");
+	                while (rs.next()) {
+	                    String info = rs.getString("info");
+	                    availableProducts.append("- ").append(info).append("\n");
+	                }
+
+	                String title = JOptionPane.showInputDialog(availableProducts.toString());
+	                String getProductQuery = "SELECT * FROM products WHERE info = ?";
+
+	                try {
+	                    pstmt = conn.prepareStatement(getProductQuery);
+	                    pstmt.setString(1, title);
+	                    rs = pstmt.executeQuery();
+
+	                    if (rs.next()) {
+	                        String no = rs.getString("no");
+	                        String info = rs.getString("info");
+	                        int price = rs.getInt("price");
+	                        int amount = rs.getInt("amount");
+	                        int tPrice = rs.getInt("tPrice");
+
+	                        int num = Integer.parseInt(JOptionPane.showInputDialog("구매할 갯수를 입력하세요:"));
+	                        if (num <= amount) {
+	                            int totalPrice = tPrice * num;
+
+	                            // Update the stock quantity
+	                            String updateQuery = "UPDATE products SET amount = amount - ? WHERE no = ?";
+	                            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+	                            updateStatement.setInt(1, num);
+	                            updateStatement.setString(2, no);
+	                            updateStatement.executeUpdate();
+
+	                            JOptionPane.showMessageDialog(
+	                                    null,
+	                                    "구매가 완료되었습니다.\n구매 결과:\n상품명: " + info + "\n구매 수량: " + num + "\n총 가격: " + totalPrice
+	                            );
+	                        } else {
+	                            JOptionPane.showMessageDialog(null, "상품의 재고가 부족합니다.");
+	                        }
+	                    } else {
+	                        JOptionPane.showMessageDialog(null, "해당 상품이 존재하지 않습니다.");
+	                    }
+
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+
+	        } else if (sel3 == 1) {
+	            // 뒤로가기
+	            break;
+	        }
+	    } while (true);
+	}
 ```
