@@ -60,7 +60,9 @@
     
     sellButton = new JButton("판매자");
     buyButton = new JButton("구매자");
-
+```
+**두 개의 개체를 만듭니다. 객체는 텍스트를 표시하고 사용자가 클릭할 때 작업을 수행하는 데 사용할 수 있는 GUI 구성 요소입니다. 객체에는 "판매자"(판매자)라는 레이블이 지정되고 객체에는 "구매자"(구매자)라는 레이블이 지정됩니다.**
+```
     sellerButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -74,7 +76,9 @@
         buyerService();
       }
     });
-
+```
+**버튼을 눌렀을때 해당하는 메소드를 해출하는 함수 입니다.이 메서드는 사용자가 개체를 클릭할 때 호출됩니다.**
+```
     panel.add(sellerButton);
     panel.add(buyerButton);
 
