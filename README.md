@@ -78,18 +78,6 @@
 ```
   public void sellService() {
     // 판매자 관련 로직 구현
-    // 예: 판매자 화면을 보여주고 필요한 기능을 구현
-	  String[] options = {"등록", "삭제", "목록", "검색", "뒤로가기"};
-	    int sel2 = JOptionPane.showOptionDialog(
-	        null,
-	        "판매자 관리시스템입니다.\n기능을 선택하세요.",
-	        "판매자",
-	        JOptionPane.DEFAULT_OPTION,
-	        JOptionPane.PLAIN_MESSAGE,
-	        null,
-	        options,
-	        options[0]
-	    );
 
 	    switch (sel2) {
 	      case 0:
