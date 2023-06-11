@@ -68,90 +68,7 @@
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
 ```  
-**buyService() 함수는 구매자에게 다음 기능을 제공하는 Java 함수입니다.**
-* 제품 구매: 구매자는 사용 가능한 제품 목록에서 제품을 선택하고 구매하려는 수량을 입력하여 제품을 구매할 수 있습니다.
-* 뒤로 가기: 구매자는 이전 화면으로 돌아갈 수 있습니다.**
-```
- public void buyService() {
-	    do {
-	        String[] options = {"구매하기", "뒤로가기"};
-	        int sel3 = JOptionPane.showOptionDialog(
-	                null,
-	                "구매 시스템입니다.\n기능을 선택하세요.",
-	                "구매자",
-	                JOptionPane.DEFAULT_OPTION,
-	                JOptionPane.PLAIN_MESSAGE,
-	                null,
-	                options,
-	                options[0]
-	        );
 
-	        if (sel3 == 0) {
-	            // Retrieve available product information
-	            String query = "SELECT info FROM products";
-	            try {
-	                pstmt = conn.prepareStatement(query);
-	                rs = pstmt.executeQuery();
-
-	                StringBuilder availableProducts = new StringBuilder("구매할 상품정보를 선택하세요:\n");
-	                while (rs.next()) {
-	                    String info = rs.getString("info");
-	                    availableProducts.append("- ").append(info).append("\n");
-	                }
-
-	                String title = JOptionPane.showInputDialog(availableProducts.toString());
-	                String getProductQuery = "SELECT * FROM products WHERE info = ?";
-
-	                try {
-	                    pstmt = conn.prepareStatement(getProductQuery);
-	                    pstmt.setString(1, title);
-	                    rs = pstmt.executeQuery();
-
-	                    if (rs.next()) {
-	                        String no = rs.getString("no");
-	                        String info = rs.getString("info");
-	                        int price = rs.getInt("price");
-	                        int amount = rs.getInt("amount");
-	                        int tPrice = rs.getInt("tPrice");
-
-	                        int num = Integer.parseInt(JOptionPane.showInputDialog("구매할 갯수를 입력하세요:"));
-	                        if (num <= amount) {
-	                            int totalPrice = tPrice * num;
-
-	                            // Update the stock quantity
-	                            String updateQuery = "UPDATE products SET amount = amount - ? WHERE no = ?";
-	                            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
-	                            updateStatement.setInt(1, num);
-	                            updateStatement.setString(2, no);
-	                            updateStatement.executeUpdate();
-
-	                            JOptionPane.showMessageDialog(
-	                                    null,
-	                                    "구매가 완료되었습니다.\n구매 결과:\n상품명: " + info + "\n구매 수량: " + num + "\n총 가격: " + totalPrice
-	                            );
-	                        } else {
-	                            JOptionPane.showMessageDialog(null, "상품의 재고가 부족합니다.");
-	                        }
-	                    } else {
-	                        JOptionPane.showMessageDialog(null, "해당 상품이 존재하지 않습니다.");
-	                    }
-
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-
-	        } else if (sel3 == 1) {
-	            // 뒤로가기
-	            break;
-	        }
-	    } while (true);
-	}
-```   
------
 **sellService() 함수는 판매자에게 다음 기능을 제공하는 Java 함수입니다.**
 * 제품 등록: 판매자는 제품 번호, 정보, 가격, 금액 및 배송비를 제공하여 새 제품을 등록할 수 있습니다.
 * 제품 삭제: 판매자는 제품 번호를 제공하여 기존 제품을 삭제할 수 있습니다.
@@ -285,4 +202,90 @@
 	        break;
 	    }
 	  }
+```  
+-----
+**buyService() 함수는 구매자에게 다음 기능을 제공하는 Java 함수입니다.**
+* 제품 구매: 구매자는 사용 가능한 제품 목록에서 제품을 선택하고 구매하려는 수량을 입력하여 제품을 구매할 수 있습니다.
+* 뒤로 가기: 구매자는 이전 화면으로 돌아갈 수 있습니다.**
 ```
+ public void buyService() {
+	    do {
+	        String[] options = {"구매하기", "뒤로가기"};
+	        int sel3 = JOptionPane.showOptionDialog(
+	                null,
+	                "구매 시스템입니다.\n기능을 선택하세요.",
+	                "구매자",
+	                JOptionPane.DEFAULT_OPTION,
+	                JOptionPane.PLAIN_MESSAGE,
+	                null,
+	                options,
+	                options[0]
+	        );
+
+	        if (sel3 == 0) {
+	            // Retrieve available product information
+	            String query = "SELECT info FROM products";
+	            try {
+	                pstmt = conn.prepareStatement(query);
+	                rs = pstmt.executeQuery();
+
+	                StringBuilder availableProducts = new StringBuilder("구매할 상품정보를 선택하세요:\n");
+	                while (rs.next()) {
+	                    String info = rs.getString("info");
+	                    availableProducts.append("- ").append(info).append("\n");
+	                }
+
+	                String title = JOptionPane.showInputDialog(availableProducts.toString());
+	                String getProductQuery = "SELECT * FROM products WHERE info = ?";
+
+	                try {
+	                    pstmt = conn.prepareStatement(getProductQuery);
+	                    pstmt.setString(1, title);
+	                    rs = pstmt.executeQuery();
+
+	                    if (rs.next()) {
+	                        String no = rs.getString("no");
+	                        String info = rs.getString("info");
+	                        int price = rs.getInt("price");
+	                        int amount = rs.getInt("amount");
+	                        int tPrice = rs.getInt("tPrice");
+
+	                        int num = Integer.parseInt(JOptionPane.showInputDialog("구매할 갯수를 입력하세요:"));
+	                        if (num <= amount) {
+	                            int totalPrice = tPrice * num;
+
+	                            // Update the stock quantity
+	                            String updateQuery = "UPDATE products SET amount = amount - ? WHERE no = ?";
+	                            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+	                            updateStatement.setInt(1, num);
+	                            updateStatement.setString(2, no);
+	                            updateStatement.executeUpdate();
+
+	                            JOptionPane.showMessageDialog(
+	                                    null,
+	                                    "구매가 완료되었습니다.\n구매 결과:\n상품명: " + info + "\n구매 수량: " + num + "\n총 가격: " + totalPrice
+	                            );
+	                        } else {
+	                            JOptionPane.showMessageDialog(null, "상품의 재고가 부족합니다.");
+	                        }
+	                    } else {
+	                        JOptionPane.showMessageDialog(null, "해당 상품이 존재하지 않습니다.");
+	                    }
+
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+
+	        } else if (sel3 == 1) {
+	            // 뒤로가기
+	            break;
+	        }
+	    } while (true);
+	}
+```   
+-----
+
