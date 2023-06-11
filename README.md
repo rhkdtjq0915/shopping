@@ -63,17 +63,17 @@
 ```
 **두 개의 개체를 만듭니다. 객체는 텍스트를 표시하고 사용자가 클릭할 때 작업을 수행하는 데 사용할 수 있는 GUI 구성 요소입니다. 객체에는 "판매자"(판매자)라는 레이블이 지정되고 객체에는 "구매자"(구매자)라는 레이블이 지정됩니다.**
 ```
-    sellerButton.addActionListener(new ActionListener() {
+    sellButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        sellerService();
+        sellService();
       }
     });
 
-    buyerButton.addActionListener(new ActionListener() {
+    buyButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        buyerService();
+        buyService();
       }
     });
 ```
