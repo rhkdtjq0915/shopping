@@ -69,9 +69,9 @@ main()ShoppingUI 메서드는 새 개체를 만들고 주 메뉴를 표시합니
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
 ```  
-**buyerService() 메서드는 모든 구매자 관련 작업을 처리합니다.**
+**buyService() 메서드는 모든 구매자 관련 작업을 처리합니다.**
 ```
- public void buyerService() {
+ public void buyService() {
 	    do {
 	        String[] options = {"구매하기", "뒤로가기"};
 	        int sel3 = JOptionPane.showOptionDialog(
