@@ -44,8 +44,8 @@
 
     panel = new JPanel();
     
-    sellerButton = new JButton("판매자");
-    buyerButton = new JButton("구매자");
+    sellButton = new JButton("판매자");
+    buyButton = new JButton("구매자");
 
     sellerButton.addActionListener(new ActionListener() {
       @Override
