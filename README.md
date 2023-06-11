@@ -52,8 +52,11 @@
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 ```
 **개체에 대한 기본 닫기 작업을 로 설정합니다. 즉, 사용자가 개체를 닫으면 응용 프로그램이 종료됩니다.**
-
+```
     panel = new JPanel();
+``` 
+**개체를 만듭니다. 객체는 GUI 구성 요소의 컨테이너입니다.**
+```
     
     sellButton = new JButton("판매자");
     buyButton = new JButton("구매자");
