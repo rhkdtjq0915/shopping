@@ -68,7 +68,7 @@
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
 ```  
-
+-----
 **sellService() 함수는 판매자에게 다음 기능을 제공하는 Java 함수입니다.**
 * 제품 등록: 판매자는 제품 번호, 정보, 가격, 금액 및 배송비를 제공하여 새 제품을 등록할 수 있습니다.
 * 제품 삭제: 판매자는 제품 번호를 제공하여 기존 제품을 삭제할 수 있습니다.
